@@ -29,7 +29,7 @@ def inning():
         pass
 
 # 한 경기 모든 이닝 크롤링 + 엑셀 저장
-def inning_crawl():
+def game_crawl():
     columns = ['이닝', '판정', 'x좌표', 'y좌표']
     games = driver.find_elements_by_class_name('search__data')
     for i in range(len(games)):
@@ -44,7 +44,7 @@ def inning_crawl():
         inning()
         df = pd.DataFrame(rows, columns = columns)
         df.index.names = [f'{date}_{match}_{referee}']
-        df.to_excel(f'./cd/{date}_{match}_{referee}1.xlsx')
+        df.to_excel(f'./cd/{date}_{match}_{referee}.xlsx')
         
 # 달력 넘기기
 def first_cal(num):
@@ -68,7 +68,7 @@ def last_cal(num):
             break
 
 # 한 달 크롤링
-def game_crawl(num):
+def month_crawl(num):
     for i in range(42):
         month = driver.find_element_by_class_name('mx-panel.mx-panel-date')
         day = month.find_elements_by_tag_name('td')[i]
@@ -78,7 +78,7 @@ def game_crawl(num):
             time.sleep(3)
             driver.find_element_by_class_name('mx-datepicker-btn.mx-datepicker-btn-confirm').click()
             time.sleep(10)
-            inning_crawl()
+            game_crawl()
             last_cal(num)
         else :
             continue
@@ -98,11 +98,12 @@ def crawl(num):
 # 2018.11 : 37 ~ 2018.03 : 45
 # 2017.10 : 50 ~ 2017.03 : 57
 
-driver = webdriver.Chrome(r'C:/Users/JngMK/Desktop/2021KNUpython2/chromedriver')
+# driver path 넣기
+driver = webdriver.Chrome(r'your path')
 url = 'https://strikes.zone/game/211115DSBKTW'
 driver.get(url)
 time.sleep(10)
-driver.find_element_by_css_selector('div.match__type > button.type__btn.type__btn--inning').click()
+driver.find_element_by_css_selector('div.match__type > button.type__btn.type__btn--inning').click() # 이닝별 데이터 보기
 crawl_months = [1,2,3,4,5,6,7,8,13,14,15,16,17,18,19,26,27,28,29,30,31,32,33,37,38,39,40,41,42,43,44,45,50,51,52,53,54,55,56,57]
 for i in crawl_months:
     crawl(i)
