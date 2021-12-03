@@ -7,26 +7,22 @@ from selenium.webdriver.support.select import Select
 
 # 1 : 정규시즌
 # 2 : 포스트시즌
-
 def select_season(num):
     select_ss = Select(driver.find_element_by_id('ddlSeries'))
     select_ss.select_by_index(num)
 
 # 0 : 2021 ~ 4 : 2017
-
 def select_year(num):
     select_yr = Select(driver.find_element_by_id('ddlYear'))
     select_yr.select_by_index(num)
 
 # 0 : 1월 ~ 11 : 12월
-
 def select_mon(num):
     select_m = Select(driver.find_element_by_id('ddlMonth'))
     select_m.select_by_index(num)
 
-# 0 : 2021 ~ 4 : 2017
-# 0 : 1월 ~ 11 : 12월
-
+# 정규시즌 데이터
+# 점수차는 그 이닝 시작 전 점수차
 def regular_season(num):
     select_season(1)
     time.sleep(5)
@@ -34,13 +30,12 @@ def regular_season(num):
     time.sleep(5)
     for i in range(2, 10):
         select_mon(i)
-        
         html = driver.page_source
         soup = bs(html, 'html.parser')
         match_info = []
         hrefs = []
-        games = soup.select('tbody > tr')
         
+        games = soup.select('tbody > tr')
         for game in games:
             if '-' in game.select('td')[-1] :
                 hrefs.append(game.select_one('td.relay a')['href'])
@@ -131,12 +126,12 @@ def regular_season(num):
             select_year(num)
             time.sleep(5)
 
+# 포스트시즌 데이터
 def post_season(num):
     select_season(2)
     time.sleep(5)
     select_year(num)
     time.sleep(5)
-    
     html = driver.page_source
     soup = bs(html, 'html.parser')
     match_info = []
