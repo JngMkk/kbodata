@@ -6,7 +6,6 @@ import pandas as pd
 # 이닝별 판정, x좌표, y좌표
 def inning():
     global rows
-    global innings
     rows = []
     innings = driver.find_elements_by_class_name('inning__view')
     if len(innings) >= 9 :
