@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 import time
 import pandas as pd
 
-# 이닝별 판정, x좌표, y좌표 데이터 프레임(전역 변수)
+# 이닝별 판정, x좌표, y좌표 데이터 프레임
 def inning():
     global innings
     innings = driver.find_elements_by_class_name('inning__view')
