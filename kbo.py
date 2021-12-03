@@ -12,6 +12,7 @@ def select_season(num):
     select_ss.select_by_index(num)
 
 # 0 : 2021 ~ 4 : 2017
+# 해가 넘어가면 최신화
 def select_year(num):
     select_yr = Select(driver.find_element_by_id('ddlYear'))
     select_yr.select_by_index(num)
