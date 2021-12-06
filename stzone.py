@@ -13,12 +13,12 @@ def inning():
             inning_index = innings.index(inning) + 1
             stzone = inning.find_elements_by_class_name('strike__zone')[3]      # 4번째 그림 심판이 판정한 스트라이크 + 볼
             svg = stzone.find_element_by_tag_name('svg')
-            imgs = svg.find_elements_by_tag_name('image')
-            for img in imgs:
+            balls = svg.find_elements_by_tag_name('circle')
+            for ball in balls :
                 inn = inning_index
-                xcd = img.get_attribute('x')
-                ycd = img.get_attribute('y')
-                if img.get_attribute('xlink:href') == '/_nuxt/img/1c8f58b.png' :
+                xcd = ball.get_attribute('cx')
+                ycd = ball.get_attribute('cy')
+                if ball.get_attribute('fill') == 'rgba(219, 15, 0, 0.7)' :
                     sb = 1
                 else :
                     sb = 0
