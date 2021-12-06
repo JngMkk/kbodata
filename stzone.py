@@ -28,7 +28,7 @@ def inning():
 
 # 한 경기 모든 이닝 크롤링 + 엑셀 저장
 def inning_crawl():
-    columns = ['이닝', '판정', 'x좌표', 'y좌표']
+    columns = ['이닝', 'x좌표', 'y좌표', '판정']
     games = driver.find_elements_by_class_name('search__data')
     for i in range(len(games)):
         driver.find_elements_by_class_name('search__data')[i].click()
