@@ -100,7 +100,7 @@ def crawl(num):
 # 2017.10 : 50 ~ 2017.03 : 57
 
 driver = webdriver.Chrome(r'your path') # path 넣기
-url = 'https://strikes.zone/game/211115DSBKTW'
+url = 'https://strikes.zone'
 driver.get(url)
 time.sleep(10)
 driver.find_element_by_css_selector('div.match__type > button.type__btn.type__btn--inning').click()
