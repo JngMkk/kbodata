@@ -27,8 +27,8 @@ def inning():
     else :
         pass
 
-# 한 경기 모든 이닝 크롤링 + 엑셀 저장
-def inning_crawl():
+# 한 경기 모든 이닝 + 엑셀 저장
+def all_inning():
     columns = ['이닝', 'x좌표', 'y좌표', '판정']
     games = driver.find_elements_by_class_name('search__data')
     for i in range(len(games)):
@@ -70,7 +70,7 @@ def last_cal(num):
             break
 
 # 한 달 모든 경기
-def game_crawl(num):
+def month_match(num):
     for i in range(42):
         month = driver.find_element_by_class_name('mx-panel.mx-panel-date')
         day = month.find_elements_by_tag_name('td')[i]
@@ -79,15 +79,15 @@ def game_crawl(num):
             time.sleep(1)
             driver.find_element_by_class_name('mx-datepicker-btn.mx-datepicker-btn-confirm').click()
             time.sleep(10)
-            inning_crawl()
+            all_inning()
             last_cal(num)
         else :
             continue
 
 # 최종
-def crawl(num):
+def all_match(num):
     first_cal(num)
-    game_crawl(num)
+    month_match(num)
 
 # 리스트 만들어서 할 필요는 없음. 빠르게 하려고.
 # 한 달 넘어갈 때마다 최신화
@@ -109,6 +109,6 @@ driver.find_element_by_css_selector('#__layout > div > div > section > section >
 time.sleep(1)
 driver.find_element_by_css_selector('#__layout > div > div > section > section > header > div.match__type > div > div > ul:nth-child(3) > li:nth-child(1) > button:nth-child(2)').click()
 time.sleep(1)
-crawl_months = [1,2,3,4,5,6,7,8,13,14,15,16,17,18,19,26,27,28,29,30,31,32,33,37,38,39,40,41,42,43,44,45,50,51,52,53,54,55,56,57]
-for i in crawl_months:
-    crawl(i)
+months = [1,2,3,4,5,6,7,8,13,14,15,16,17,18,19,26,27,28,29,30,31,32,33,37,38,39,40,41,42,43,44,45,50,51,52,53,54,55,56,57]
+for i in months:
+    all_match(i)
