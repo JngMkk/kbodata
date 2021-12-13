@@ -69,7 +69,7 @@ def last_cal(num):
         if i == num :
             break
 
-# 한 달 크롤링
+# 한 달 모든 경기
 def game_crawl(num):
     for i in range(42):
         month = driver.find_element_by_class_name('mx-panel.mx-panel-date')
