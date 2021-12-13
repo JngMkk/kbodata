@@ -2,20 +2,21 @@ import os
 import math
 import pandas as pd
 
-# 점과 직선 거리 계산
 def cal_dist(x1, y1, x2, y2, a, b):
+    """점과 직선 거리 계산"""
     area = abs((x1-a) * (y2-b) - (y1-b) * (x2 - a))
     AB = ((x1-x2)**2 + (y1-y2)**2) **0.5
     distance = area/AB
     return distance
 
-# 2차원 평면에 점좌표 class
+
 class point:
+    """2차원 평면에 점좌표 class """
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
-# 약 3200개 파일 심판 누구누구인지.
+""" 약 3200개 파일 심판 누구누구인지 """
 path = "./cd_report/"
 file_lst = os.listdir(path)
 ref = [] # 심판 리스트
@@ -26,7 +27,7 @@ for file in file_lst:
     else :
         continue
 
-# 심판별로 정리
+""" 심판별로 정리 """
 columns = ['이닝', 'x좌표', 'y좌표', '판정']
 for i in ref:
     df = pd.DataFrame(columns = columns)
