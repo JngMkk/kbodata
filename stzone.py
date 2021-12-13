@@ -6,6 +6,7 @@ import pandas as pd
 # 이닝별 판정, x좌표, y좌표
 def inning():
     global rows
+    global innings
     rows = []
     innings = driver.find_elements_by_class_name('inning__view')
     if len(innings) >= 9 :
@@ -40,9 +41,12 @@ def inning_crawl():
         date = soup.select_one('div.match__date').text.strip().split('투')[0]
         referee = soup.select_one('div.match__date > span').text.split('(')[1].split('심')[0].split(' ')[0]
         inning()
-        df = pd.DataFrame(rows, columns = columns)
-        df.index.names = [f'{date}_{match}_{referee}']
-        df.to_excel(f'./cd/{date}_{match}_{referee}.xlsx')
+        if len(innings) >= 9 :
+            df = pd.DataFrame(rows, columns = columns)
+            df.index.names = [f'{date}_{match}_{referee}']
+            df.to_excel(f'./cd/{date}_{match}_{referee}.xlsx')
+        else :
+            continue
         
 # 달력 넘기기
 def first_cal(num):
