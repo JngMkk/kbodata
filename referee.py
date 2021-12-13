@@ -16,7 +16,7 @@ class point:
         self.x = x
         self.y = y
 
-""" 약 3200개 파일 심판 누구누구인지 """
+# 약 3200개 파일 심판 누구누구인지
 path = "./cd_report/"
 file_lst = os.listdir(path)
 ref = [] # 심판 리스트
@@ -27,7 +27,7 @@ for file in file_lst:
     else :
         continue
 
-""" 심판별로 정리 """
+# 심판별로 정리
 columns = ['이닝', 'x좌표', 'y좌표', '판정']
 for i in ref:
     df = pd.DataFrame(columns = columns)
@@ -44,7 +44,6 @@ for i in ref:
     df['이닝'] = df['이닝'].replace([7,8,9], '후반') # 7~9 회 후반
     df.to_csv(f'./ref/{i}.csv', encoding = 'euc-kr')
     
-
 path1 = "./ref/"
 file_lst1 = os.listdir(path1)
 
