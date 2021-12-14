@@ -1,3 +1,3 @@
 # kbodata
 
-kbo, stzone 데이터 크롤링
+stzone 데이터 크롤링
